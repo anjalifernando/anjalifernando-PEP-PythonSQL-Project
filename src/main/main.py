@@ -79,7 +79,7 @@ def load_and_clean_call_logs(file_path):
         next(reader, None)
 
         for row in reader:
-            if len(row) != 6:
+            if len(row) != 5:
                 continue 
             if any(value.strip() == "" for value in row):
                 continue
@@ -87,18 +87,18 @@ def load_and_clean_call_logs(file_path):
             cursor.execute(
                 """
                 INSERT INTO callLogs
-                (callId, phoneNumber, startTime, endTime, direction, userId)
+                (phoneNumber, startTime, endTime, direction, userId)
                 VALUES (?, ?, ?, ?, ?, ?)
                 """,
                 (
-                    int(row[0]),
-                    row[1],
+                    row[0],
+                    int(row[1]),
                     int(row[2]),
-                    int(row[3]),
-                    row[4],
-                    int(row[5])
+                    row[3],
+                    int(row[4]),
                 )
             )
+            
     conn.commit()
 
 

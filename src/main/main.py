@@ -53,7 +53,7 @@ def load_and_clean_users(file_path):
         reader = csv.reader(csvfile)
 
         #skip header row
-        next(reader,None)
+        next(reader, None)
 
         for row in reader:
             if len(row) != 3:

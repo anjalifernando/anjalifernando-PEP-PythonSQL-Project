@@ -63,8 +63,8 @@ def load_and_clean_users(file_path):
                 continue
 
             cursor.execute(
-                "INSERT INTO users (userId, firstName, lastName) VALUES (?, ?)",
-                (row[0]), row[1]
+                "INSERT INTO users (firstName, lastName) VALUES (?, ?)",
+                (row[0]), row[1])
             )
 
     conn.commit()
@@ -88,7 +88,7 @@ def load_and_clean_call_logs(file_path):
                 """
                 INSERT INTO callLogs
                 (phoneNumber, startTime, endTime, direction, userId)
-                VALUES (?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?)
                 """,
                 (
                     row[0],
@@ -98,7 +98,7 @@ def load_and_clean_call_logs(file_path):
                     int(row[4]),
                 )
             )
-            
+
     conn.commit()
 
 

@@ -58,13 +58,13 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) != 3:
                 continue
-        if any(value.strip() == "" for value in row):
-            continue
+            if any(value.strip() == "" for value in row):
+                continue
 
-        cursor.execute(
-            "INSERT INTO users (userId, firstName, lastName) VALUES (?, ?, ?)",
-            (int(row[0]), row[1], row[2])
-        )
+            cursor.execute(
+                "INSERT INTO users (userId, firstName, lastName) VALUES (?, ?, ?)",
+                (int(row[0]), row[1], row[2])
+            )
 
     conn.commit()
 
@@ -78,26 +78,26 @@ def load_and_clean_call_logs(file_path):
         next(reader, None)
 
         for row in reader:
-            in len(row) != 6:
-            continue 
-        if any(value.strip() == "" for value in row):
-            continue
+            if len(row) != 6:
+                continue 
+            if any(value.strip() == "" for value in row):
+                continue
 
-        cursor.execute(
-            """
-            INSERT INTO callLogs
-            (callId, phoneNumber, startTime, endTime, direction, userId)
-            VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            (
-                int(row[0]),
-                row[1],
-                int(row[2]),
-                int(row[3]),
-                row[4],
-                int(row[5])
+            cursor.execute(
+                """
+                INSERT INTO callLogs
+                (callId, phoneNumber, startTime, endTime, direction, userId)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    int(row[0]),
+                    row[1],
+                    int(row[2]),
+                    int(row[3]),
+                    row[4],
+                    int(row[5])
+                )
             )
-        )
     conn.commit()
 
 

@@ -65,7 +65,6 @@ def load_and_clean_users(file_path):
             cursor.execute(
                 "INSERT INTO users (firstName, lastName) VALUES (?, ?)",
                 (row[0]), row[1])
-            )
 
     conn.commit()
 
